@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Form</title>
-    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link rel="stylesheet" href="/static/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="/static/bootstrap/css/custom.css">
 </head>
 <body>
      <nav class="navbar navbar-default">
@@ -38,6 +39,21 @@
             <div class="form-group">
                 <label for="">Product price:</label><label class="text-danger" for="">*</label><br>
                 <input type="number" class="form-control" required placeholder="Product price" name="price">
+            </div>
+
+            <div class="form-group">
+                <label for="">Product category:</label><label class="text-danger" for="">*</label><br>
+                <select name="category" class="form-control">
+                    <option value="">Select cartegory</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Television">Television</option>
+                    <option value="Woofer">Woofer</option>
+                    <option value="Fridge">Fridge</option>
+                    <option value="Blender">Blender</option>
+                    <option value="Microwave">Microwave</option>
+                    <option value="Heater">Heater</option>
+                    <option value="Camera">Camera</option>
+                </select>
             </div>
 
             <div class="form-group">

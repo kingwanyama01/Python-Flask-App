@@ -3,28 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Cart</title>
-    <link rel="stylesheet" href="/static/bootstrap.css">
+    <script src="../static/bootstrap/js/jquery-3.4.0.js"></script>
+    <script src="../static/bootstrap/js/popper.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
 </head>
 <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">O'My eShop</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li><a href="/register">Add users</a></li>
-          <li class="active"><a href="/show">View Products</a></li>
-            <li><a href="/">Add products</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-          <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-          <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ session['names'] }}</a></li>
-          <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart">Cart</span> {{ cartproductcount }}</a></li>
+    <nav class="navbar navbar-expand-md navbar-light">
+      <!-- Brand -->
+      <a class="navbar-brand" href="/">O'My eShop</a>
+
+      <!-- Toggler/collapsibe Button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Add users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/show">View Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Add products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">{{ session['names'] }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/cart"><span>Cart</span> {{ cartproductcount }}</a>
+          </li>
         </ul>
       </div>
     </nav>
+
 
     <div class="col-sm-10 col-sm-offset-1">
      {% with messages = get_flashed_messages() %}
@@ -35,12 +50,18 @@
     <h3 class="text-muted text-center">Your cart</h3>
         <div class="row">
             {% for product in cartproducts %}
-            <div class="col-xs-4">
-                <div class="well well-sm">
-                    <h2>{{ product.name }}</h2>
-                    <img src="../static/resources/{{ product.image }}" alt="" style="height: 30vh; width: 100%;">
-                    <h4>Ksh. {{ product.price }}</h4>
-                    <p>{{ product.description }}</p>
+            <div class="col-md-1"></div>
+
+            <div class="col-md-3">
+                <div class="container">
+                      <div class="card bg-info"  style="width:400px;padding: 15px;">
+                          <h2 class="card-title">{{ product.name }}</h2>
+                        <img class="card-img-top" src="../static/resources/{{ product.image }}" alt="Product image" style="height: 30vh; width: 100%;">
+                        <div class="card-body">
+                          <h4 class="card-text">Ksh. {{ product.price }}</h4>
+                          <p>{{ product.description }}</p>
+                        </div>
+                      </div>
                 </div>
             </div>
             {% endfor %}
@@ -68,7 +89,52 @@
 {#        {% endfor %}#}
 {#    </table>#}
     </div>
-    <a href="/checkout" class="btn btn-block btn-primary navbar-fixed-bottom">Checkout</a>
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Total amount: Ksh. {{ total_amount }}</h1>
+        </div>
+        <div class="col-md-6">
+            <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  Checkout
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Checking out</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <h4 class="text-muted text-center">Enter your M-PESA number to checkout your products for Ksh {{ total_amount }}</h4>
+          <form action="/checkout" class="was-validated">
+              <div class="form-group">
+                <label for="uname">M-PESA Number:</label>
+                <input type="text" class="form-control" id="uname" placeholder="Enter mpesa number" name="uname" required>
+                <div class="valid-feedback">Valid.</div>
+                <div class="invalid-feedback">Please fill out this field.</div>
+              </div>
+              <div class="row">
+                  <div class="col-6">
+                      <button type="submit" class="btn btn-outline-primary btn-block">Pay</button>
+                  </div>
+                  <div class="col-6">
+                      <button type="button" class="btn btn-outline-danger btn-block" data-dismiss="modal">Close</button>
+                  </div>
+              </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+    </div>
 </body>
 </html>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Users</title>
+    <title>Invoice</title>
     <link rel="stylesheet" href="/static/bootstrap/bootstrap.css">
 </head>
 <body>
@@ -32,27 +32,40 @@
         {% endfor %}
      {% endwith %}
 
-    <table class="table table-striped table-bordered">
+    <table class="table">
+    <h3 class="text-muted text-center">O'My eShop Invoice</h3>
         <tr>
-            <th>ID</th>
-            <th>NAMES</th>
-            <th>EMAIL</th>
-            <th>SUM PURCHASE</th>
-            <th>Delete</th>
-            <th>Update</th>
-            <th>Invoice</th>
+            <th>Item</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Tax</th>
+            <th>Total</th>
         </tr>
         {% for user in users %}
         <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.names }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.sum_purchase }}</td>
-            <td><a href="delete/{{ user.id }}" class="btn btn-danger">Delete</a></td>
-            <td><a href="update/{{ user.id }}" class="btn btn-info">Update</a></td>
-            <td><a href="invoice/{{ user.id }}" class="btn btn-primary">Invoice</a></td>
+            <td>Electronics delivery</td>
+            <td>O'My eShop delivery</td>
+            <td>Ksh. {{ user.sum_purchase }}</td>
+            <td>Ksh. 0.00</td>
+            <td>Ksh. {{ user.sum_purchase }}</td>
         </tr>
         {% endfor %}
+
+        <tr>
+            <td>By:</td>
+            <td>O'My eShop delivery</td>
+            <td></td>
+            <td></td>
+            <td>Items sold can't be returned</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="">Print</a></td>
+        </tr>
     </table>
     </div>
 </body>
